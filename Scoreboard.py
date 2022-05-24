@@ -9,6 +9,7 @@ class Scoreboard:
     def FillTheScoreboard(self):
         file = open("scores.txt", 'r')
         content = file.read()
+        content = content[:-1]
         file.close()
         list_content = content.split(' ')
         i = 0
@@ -19,8 +20,14 @@ class Scoreboard:
         for element in self.__scoreboard:
             print(element+ ": " + str(self.__scoreboard[element]))
     
-    def Save(self):
+    def Save(self, name, score):
+        if name in self.__scoreboard:
+            if self.__scoreboard[name] < score:
+                self.__scoreboard[name] = score
+        else:
+            self.__scoreboard[name] = score
+        file = open("scores.txt", 'w')
+        for element in self.__scoreboard:
+            file.write(element + " "+str(self.__scoreboard[element])+" ")
+        file.close()
         
-    #fillthescoreboard
-    #Display
-    #Save
